@@ -7,6 +7,7 @@
     <title>Add Article</title>
     <link rel="stylesheet" href="<?= base_url('globals.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
@@ -58,7 +59,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary" onclick="showToast()">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="ti ti-device-floppy"></i>
                                     <?= (isset($artikel) && $artikel) ? 'Perbarui artikel' : 'Simpan artikel' ?>
                                 </button>
@@ -73,7 +74,22 @@
     <?= view('Layout\footer'); ?>
     </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="<?= base_url('ui-script.js') ?>"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (session()->getFlashdata('sukses')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '<?= esc(session()->getFlashdata('sukses')) ?>',
+                    timer: 3500,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Tutup'
+                });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 
 </html>
